@@ -43,7 +43,7 @@
             <a class="btn btn-outline-light fw-bold px-3" href="cv.html">Özgeçmiş (CV)</a>
             <a class="btn btn-outline-light fw-bold px-3" href="sehrim.html">Şehrim</a>
             <a class="btn btn-outline-light fw-bold px-3" href="mirasvetakim.html">Mirasımız ve Takımımız</a>
-            <a class="btn btn-outline-light fw-bold px-3" href="#">İlgi Alanlarım</a>
+            <a class="btn btn-outline-light fw-bold px-3" href="ilgialanlarim.html">İlgi Alanlarım</a>
             <a class="btn fw-bold px-3 text-white" href="#"
                 style="background-color: #008080; border: none;">İletişim</a>
         </div>
@@ -55,25 +55,25 @@
                 <div class="bg-white p-4 rounded shadow-sm h-100">
                     <h2 class="mb-4 border-bottom pb-2">Benimle İletişime Geçin</h2>
 
-                    <form action="#" method="POST">
+                    <form action="php/iletisim.php" method="POST">
 
                         <div class="mb-3">
                             <label for="adSoyad" class="form-label">Adınız Soyadınız:</label>
                             <input type="text" class="form-control" id="adSoyad" name="adSoyad"
                                 placeholder="Adınızı ve soyadınızı girin" required>
-                        </div>
+                        </div>//BUNU KONTROLÜNÜ YAP HA UNUTMA KENDİME NOT
 
                         <div class="mb-3">
                             <label for="email" class="form-label">E-posta Adresiniz:</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 placeholder="ornek@sakarya.edu.tr" required>
-                        </div>
+                        </div>//BUNUDA AMA NASIL YAPACAM
 
                         <div class="mb-3">
                             <label for="telefon" class="form-label">Telefon Numaranız:</label>
                             <input type="tel" class="form-control" id="telefon" name="telefon"
                                 placeholder="05XX XXX XX XX" required>
-                        </div>
+                        </div>//BUNA GEREK YOK
 
                         <div class="mb-3">
                             <label class="form-label">Cinsiyetiniz:</label>
@@ -93,7 +93,7 @@
                             <label for="mesaj" class="form-label">Mesajınız:</label>
                             <textarea class="form-control" id="mesaj" name="mesaj" rows="4"
                                 placeholder="Mesajınızı buraya yazın..." required></textarea>
-                        </div>
+                        </div>//BUNADA SINIR KOY
 
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="onayKutusu" required>
