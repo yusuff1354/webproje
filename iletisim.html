@@ -55,25 +55,25 @@
                 <div class="bg-white p-4 rounded shadow-sm h-100">
                     <h2 class="mb-4 border-bottom pb-2">Benimle İletişime Geçin</h2>
 
-                    <form action="php/iletisim.php" method="POST">
+                    <form id="iletisimform" action="php/iletisim.php" method="POST">
 
                         <div class="mb-3">
                             <label for="adSoyad" class="form-label">Adınız Soyadınız:</label>
                             <input type="text" class="form-control" id="adSoyad" name="adSoyad"
                                 placeholder="Adınızı ve soyadınızı girin" required>
-                        </div>//BUNU KONTROLÜNÜ YAP HA UNUTMA KENDİME NOT
+                        </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">E-posta Adresiniz:</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 placeholder="ornek@sakarya.edu.tr" required>
-                        </div>//BUNUDA AMA NASIL YAPACAM
+                        </div>
 
                         <div class="mb-3">
                             <label for="telefon" class="form-label">Telefon Numaranız:</label>
                             <input type="tel" class="form-control" id="telefon" name="telefon"
                                 placeholder="05XX XXX XX XX" required>
-                        </div>//BUNA GEREK YOK
+                        </div>
 
                         <div class="mb-3">
                             <label class="form-label">Cinsiyetiniz:</label>
@@ -93,7 +93,7 @@
                             <label for="mesaj" class="form-label">Mesajınız:</label>
                             <textarea class="form-control" id="mesaj" name="mesaj" rows="4"
                                 placeholder="Mesajınızı buraya yazın..." required></textarea>
-                        </div>//BUNADA SINIR KOY
+                        </div>
 
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="onayKutusu" required>
@@ -101,7 +101,7 @@
                                 onaylıyorum.</label>
                         </div>
 
-                        <button type="submit" class="btn text-white w-100"
+                        <button type="button" onClick="js:KontrolFonksiyonu()" class="btn text-white w-100"
                             style="background-color: #008080;">Gönder</button>
                     </form>
 
@@ -112,9 +112,42 @@
 
     <footer class="text-white text-center py-4 mt-auto">
         <div class="container">
-            <p class="mb-0">&copy; 2026 - Sakarya Üniversitesi</p>
+            <p class="mb-0">&copy; 2026 - Web Teknolojileri</p>
         </div>
     </footer>
+
+    <script>
+        function KontrolFonksiyonu() {
+            var adsoyad = document.getElementById("adSoyad").value;
+            var email = document.getElementById("email").value;
+            var mesaj = document.getElementById("mesaj").value;
+            var telefon = document.getElementById("telefon").value;
+            var onay = document.getElementById("onayKutusu").checked;
+
+            if (adsoyad.length < 3) {
+                alert("Lütfen geçerli bir ad giriniz!");
+                return false;
+            }
+            if (email == '') {
+                alert("Lütfen eposta adresini boş bırakmayınız!");
+                return false;
+            }
+            if (mesaj.length > 180) {
+                alert("Lütfen mesajınızı en az 180 karakter olacak şekilde yazınız!");
+                return false;
+            }
+            if (telefon.length > 11 || telefon == '') {
+                alert("Lütfen geçerli bir telefon numarası giriniz!");
+                return false;
+            }
+            if (onay == false) {
+                alert("Lütfen bilgilerin doğruluğunu onaylayınız!");
+                return false;
+            }
+
+            document.forms["iletisimform"].submit();
+        }
+    </script>
 
 </body>
 
