@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap - Web Teknolojileri</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #1A2B4C;
+        }
+
+        footer {
+            background-color: #1E2124;
+        }
+
+        .login-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <header class="text-white text-center py-4">
+        <div class="container">
+            <h1 class="display-5">Yusuf Sunav</h1>
+            <p class="lead">Giriş (Login) Sistemi</p>
+        </div>
+    </header>
+
+    <div class="container my-5 flex-grow-1">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8">
+                <div class="login-card">
+                    <h2 class="text-center mb-4" style="color: #008080;">Öğrenci Girişi</h2>
+
+                    <form id="loginform" action="php/login.php" method="POST">
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Kullanıcı Adı (Öğrenci Maili):</label>
+                            <input type="text" class="form-control" id="email" name="email"
+                                placeholder="Örn: b241210022@sakarya.edu.tr" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="sifre" class="form-label">Şifreniz (Öğrenci Numarası):</label>
+                            <input type="password" class="form-control" id="sifre" name="sifre"
+                                placeholder="Örn: b241210022" required>
+                        </div>
+
+                        <button type="button" onclick="loginkontrol()" class="btn text-white w-100 mb-3"
+                            style="background-color: #008080;">Giriş Yap</button>
+
+                        <a href="hakkimda.html" class="btn btn-secondary w-100">Ana Sayfaya Dön</a>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 - Web Teknolojileri</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function loginkontrol() {
+            var email = document.getElementById("email").value;
+            var sifre = document.getElementById("sifre").value;
+
+            //email kontrol kısmında yapay zekadan yardım alınmıştır.
+            var ogrencino_regex = /^b\d{9}$/;
+
+            var mail_regex = /^b\d{9}@sakarya\.edu\.tr$/;
+
+            if (email === "") {
+                alert("Lütfen kullanıcı adı (e-posta) alanını boş bırakmayınız!");
+                return false;
+            }
+
+            if (!mail_regex.test(email)) {
+                alert("Hatalı mail formatı! Örnek: b241210022@sakarya.edu.tr");
+                return false;
+            }
+
+            if (sifre === "") {
+                alert("Lütfen şifre alanını boş bırakmayınız!");
+                return false;
+            }
+
+            var ogrencinoalinan = email.split('@')[0];
+            if (sifre !== ogrencinoalinan) {
+                alert("Şifre yanlış!");
+                return false;
+            }
+
+            document.getElementById("loginform").submit();
+        }
+    </script>
+</body>
+
+</html>
