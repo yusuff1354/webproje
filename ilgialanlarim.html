@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İlgi Alanlarım - Web Teknolojileri</title>
+    <title>İlgi Alanlarım - Kitap Arama</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -18,59 +18,73 @@
             background-color: #1A2B4C;
         }
 
-        nav {
-            background-color: #2E4057;
-        }
-
         footer {
             background-color: #1E2124;
+        }
+
+        .card-img-top {
+            height: 300px;
+            object-fit: contain;
+            background-color: #eee;
+        }
+
+        .kitap-kard {
+            transition: transform 0.2s;
+        }
+
+        .kitap-kard:hover {
+            transform: scale(1.03);
         }
     </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 
-    <header class="text-white text-center py-4">
-        <div class="container">
-            <h1 class="display-4">Yusuf Sunav</h1>
-            <p class="lead">İlgi Alanlarım</p>
+    <header class="text-white py-4" style="background-color: #1A2B4C;">
+        <div class="container d-flex align-items-center">
+            <div class="me-4">
+                <img src="assets/profil.jpeg" alt="Yusuf Sunav" class="rounded-circle border border-3 border-white"
+                    style="width: 100px; height: 100px; object-fit: cover;">
+            </div>
+
+            <div class="text-start">
+                <h1 class="display-4 mb-0">Yusuf Sunav</h1>
+                <p class="lead mb-0">İlgi Alanlarım : Kitap Okuma</p>
+            </div>
         </div>
     </header>
 
     <nav class="navbar navbar-expand-lg navbar-dark py-3" style="background-color: #2E4057;">
         <div class="container justify-content-center gap-3">
-            <a class="btn btn-outline-light fw-bold px-3" href="hakkimda.html"
-                style="border-color: #A3B899; color: #E8F1F5;">Hakkımda</a>
-
-            <a class="btn btn-outline-light fw-bold px-3" href="cv.html"
-                style="border-color: #A3B899; color: #E8F1F5;">Özgeçmiş (CV)</a>
-            <a class="btn btn-outline-light fw-bold px-3" href="sehrim.html"
-                style="border-color: #A3B899; color: #E8F1F5;">Şehrim</a>
-            <a class="btn btn-outline-light fw-bold px-3" href="mirasvetakim.html"
-                style="border-color: #A3B899; color: #E8F1F5;">Mirasımız ve Takımımız</a>
-
+            <a class="btn btn-outline-light fw-bold px-3" href="hakkimda.html">Hakkımda</a>
+            <a class="btn btn-outline-light fw-bold px-3" href="cv.html">Özgeçmiş (CV)</a>
+            <a class="btn btn-outline-light fw-bold px-3" href="sehrim.html">Şehrim</a>
+            <a class="btn btn-outline-light fw-bold px-3" href="mirasvetakim.html">Mirasımız ve Takımımız</a>
             <a class="btn fw-bold px-3 text-white" href="#" style="background-color: #008080; border: none;">İlgi
                 Alanlarım</a>
-
-            <a class="btn btn-outline-light fw-bold px-3" href="iletisim.html"
-                style="border-color: #A3B899; color: #E8F1F5;">İletişim</a>
+            <a class="btn btn-outline-light fw-bold px-3" href="iletisim.html">İletişim</a>
         </div>
-        <a class="btn btn-warning fw-bold px-3 ms-3 me-3" href="login.html">🔑 Giriş (Login)</a>
+        <a class="btn btn-outline-light fw-bold px-3 ms-3 me-3" href="login.html">Login</a>
     </nav>
 
     <div class="container my-5 flex-grow-1">
         <div class="row justify-content-center">
-            <main class="col-lg-10 col-md-12">
-                <div class="bg-white p-5 rounded shadow-sm text-center h-100">
-                    <h2 class="mb-4" style="color: #008080;">İlgi Alanlarıma Hoş Geldiniz</h2>
-                    <p class="lead text-muted">
-                        Bu sayfada ilgi duyduğum alanları, takip ettiğim spor takımlarını ve sevdiğim içerikleri
-                        inceleyebilirsiniz.
-                    </p>
-                    <hr class="my-4">
-                    <p class="text-secondary">
-                        İçerikler en kısa zamanda API entegrasyonu ile güncellenecektir.
-                    </p>
+            <main class="col-lg-10">
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <h2 class="mb-4 text-center" style="color: #008080;">Kitap Arama Motoru</h2>
+
+                    <div class="input-group mb-5">
+                        <input type="text" id="kitap_input" class="form-control"
+                            placeholder="Kitap adı veya yazar girin..." aria-label="Kitap ara">
+                        <button class="btn text-white" style="background-color: #008080;" type="button"
+                            onclick="kitapara()">Ara</button>
+                    </div>
+
+                    <div id="kitap_sonuclar" class="row g-4">
+                        <div class="text-center">
+                            <p>Kitaplar yükleniyor...</p>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
@@ -82,7 +96,67 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.onload = function () {
+            kitap_getir("World Classics");
+        };
+
+        document.getElementById("kitap_input").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                kitapara();
+            }
+        });
+
+        function kitapara() {
+            const input_degeri = document.getElementById("kitap_input").value;
+            if (input_degeri.trim() !== "") {
+                kitap_getir(input_degeri);
+            } else {
+                alert("Lütfen bir kitap adı girin!");
+            }
+        }
+
+        function kitap_getir(sorgu) {
+            const sonuclar_alani = document.getElementById("kitap_sonuclar");
+            sonuclar_alani.innerHTML = '<div class="text-center w-100"><div class="spinner-border text-success" role="status"></div><p>Veriler getiriliyor...</p></div>';
+
+            const api_url = `https://openlibrary.org/search.json?q=${encodeURIComponent(sorgu)}&limit=6`;
+
+            fetch(api_url)
+                .then(yanit => yanit.json())
+                .then(veri => {
+                    sonuclar_alani.innerHTML = "";
+                    if (veri.docs && veri.docs.length > 0) {
+                        veri.docs.forEach(kitap => {
+                            const kapak_id = kitap.cover_i;
+                            const kapak_url = kapak_id
+                                ? `https://covers.openlibrary.org/b/id/${kapak_id}-M.jpg`
+                                : 'https://via.placeholder.com/150x220?text=Kapak+Yok';
+
+                            const kitap_html = `
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-sm kitap-kard">
+                                    <img src="${kapak_url}" class="card-img-top p-2" alt="${kitap.title}">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title fw-bold" style="color: #1A2B4C;">${kitap.title}</h5>
+                                        <p class="card-text text-muted small">Yazar: ${kitap.author_name ? kitap.author_name[0] : 'Bilinmiyor'}</p>
+                                        <p class="badge bg-secondary">Yıl: ${kitap.first_publish_year || '-'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                            sonuclar_alani.innerHTML += kitap_html;
+                        });
+                    } else {
+                        sonuclar_alani.innerHTML = '<div class="alert alert-warning w-100 text-center">Sonuç bulunamadı.</div>';
+                    }
+                })
+                .catch(hata => {
+                    sonuclar_alani.innerHTML = '<div class="alert alert-danger w-100 text-center">API bağlantı hatası!</div>';
+                });
+        }
+    </script>
 </body>
 
 </html>
