@@ -38,3 +38,24 @@ footer {
 .kitap-kard:hover {
     transform: scale(1.03);
 }
+
+/* Menü elemanlarının alt satıra geçmesini engeller */
+.flex-nowrap {
+    display: flex;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Kaydırma çubuğunu gizler */
+.custom-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.custom-scroll {
+    scrollbar-width: none;
+}
+
+/* Buton yazılarını tek satırda tutar */
+.text-nowrap {
+    white-space: nowrap !important;
+}

@@ -14,37 +14,37 @@
 <body class="d-flex flex-column min-vh-100">
 
     <header class="text-white py-4" style="background-color: #1A2B4C;">
-        <div class="container d-flex align-items-center">
-            <div class="me-4">
-                <img src="assets/profil.jpeg" alt="Yusuf Sunav" class="rounded-circle border border-3 border-white"
-                    style="width: 100px; height: 100px; object-fit: cover;">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <div class="d-flex align-items-center">
+                <div class="me-4">
+                    <img src="assets/profil.jpeg" alt="Yusuf Sunav" class="rounded-circle border border-3 border-white"
+                        style="width: 100px; height: 100px; object-fit: cover;">
+                </div>
+                <div class="text-start">
+                    <h1 class="display-5 mb-0">Yusuf Sunav</h1>
+                    <p class="lead mb-0">B251210032</p>
+                </div>
             </div>
 
-            <div class="text-start">
-                <h1 class="display-5 mb-0">Yusuf Sunav</h1>
-                <p class="lead mb-0">Bilgisayar Mühendisliği - B251210032</p>
+            <div>
+                <a class="btn btn-warning fw-bold px-4 py-2" href="login.html">Giriş</a>
             </div>
+
         </div>
     </header>
 
-    <nav class="navbar navbar-expand-lg navbar-dark py-3" style="background-color: #2E4057;">
-        <div class="container justify-content-center gap-3">
-            <a class="btn fw-bold px-3 text-white" href="#"
-                style="background-color: #008080; border: none;">Hakkımda</a>
-
-            <a class="btn btn-outline-light fw-bold px-3" href="cv.html"
-                style="border-color: #A3B899; color: #E8F1F5;">Özgeçmiş (CV)</a>
-            <a class="btn btn-outline-light fw-bold px-3" href="sehrim.html"
-                style="border-color: #A3B899; color: #E8F1F5;">Şehrim</a>
-            <a class="btn btn-outline-light fw-bold px-3" href="mirasvetakim.html"
-                style="border-color: #A3B899; color: #E8F1F5;">Mirasımız ve Takımımız</a>
-            <a class="btn btn-outline-light fw-bold px-3" href="ilgialanlarim.html"
-                style="border-color: #A3B899; color: #E8F1F5;">İlgi
-                Alanlarım</a>
-            <a class="btn btn-outline-light fw-bold px-3" href="iletisim.html"
-                style="border-color: #A3B899; color: #E8F1F5;">İletişim</a>
+    <nav class="navbar navbar-dark py-3" style="background-color: #2E4057;">
+        <div class="container">
+            <div class="d-flex overflow-auto flex-nowrap gap-2 pb-1 custom-scroll w-100">
+                <a class="btn btn-outline-light fw-bold text-nowrap" href="index.html">Hakkımda</a>
+                <a class="btn btn-outline-light fw-bold text-nowrap" href="cv.html">Özgeçmiş (CV)</a>
+                <a class="btn btn-outline-light fw-bold text-nowrap" href="sehrim.html">Şehrim</a>
+                <a class="btn btn-outline-light fw-bold text-nowrap" href="mirasvetakim.html">Mirasımız ve Takımımız</a>
+                <a class="btn btn-outline-light fw-bold text-nowrap" href="ilgialanlarim.html">İlgi Alanlarım</a>
+                <a class="btn btn-outline-light fw-bold text-nowrap" href="iletisim.html">İletişim</a>
+            </div>
         </div>
-        <a class="btn btn-outline-light fw-bold px-3 ms-3 me-3" href="login.html">Login</a>
     </nav>
 
     <div class="container my-5 flex-grow-1">
@@ -84,10 +84,11 @@
 
             <aside class="col-lg-3 col-md-12">
                 <div class="p-4 rounded shadow-sm h-100" style="background-color: #e5e7eb;">
-                    <img src="#" alt="arduino" class="img-fluid rounded shadow mb-3"
-                        style="max-width: 200px; display: block;">
-                    <img src="#" alt="Flutter projelerimden kesit" class="img-fluid rounded shadow mb-3"
-                        style="max-width: 200px; display: block;">
+                    <video controls class="img-fluid rounded shadow mb-3" style="max-width: 250px; display: block;">
+                        <source src="assets/arduino.mp4" type="video/mp4">
+                    </video>
+                    <img src="assets/flutter.png" alt="Flutter projelerimden kesit"
+                        class="img-fluid rounded shadow mb-3" style="max-width: 200px; display: block;">
                 </div>
             </aside>
         </div>
