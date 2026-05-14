@@ -4,39 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İletişim</title>
+    <title>İletişim - Yusuf Sunav</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-    <style>
-        body {
-            background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
-        }
-
-        header {
-            background-color: #1A2B4C;
-        }
-
-        nav {
-            background-color: #2E4057;
-        }
-
-        footer {
-            background-color: #1E2124;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 
-    <header class="text-white py-4" style="background-color: #1A2B4C;">
+    <header class="text-white py-4">
         <div class="container d-flex align-items-center">
             <div class="me-4">
                 <img src="assets/profil.jpeg" alt="Yusuf Sunav" class="rounded-circle border border-3 border-white"
                     style="width: 100px; height: 100px; object-fit: cover;">
             </div>
-
             <div class="text-start">
                 <h1 class="display-5 mb-0">Yusuf Sunav</h1>
                 <p class="lead mb-0">İletişim Sayfası</p>
@@ -44,7 +27,7 @@
         </div>
     </header>
 
-    <nav class="navbar navbar-expand-lg navbar-dark py-3">/*bak buraya*/
+    <nav class="navbar navbar-expand-lg navbar-dark py-3">
         <div class="container justify-content-center gap-3">
             <a class="btn btn-outline-light fw-bold px-3" href="hakkimda.html">Hakkımda</a>
             <a class="btn btn-outline-light fw-bold px-3" href="cv.html">Özgeçmiş (CV)</a>
@@ -57,97 +40,132 @@
         <a class="btn btn-outline-light fw-bold px-3 ms-3 me-3" href="login.html">Login</a>
     </nav>
 
-    <div class="container my-5 flex-grow-1">
+    <div id="app" class="container my-5 flex-grow-1">
         <div class="row justify-content-center">
             <main class="col-lg-8 col-md-12">
-                <div class="bg-white p-4 rounded shadow-sm h-100">
+                <div class="bg-white p-4 rounded shadow-sm">
                     <h2 class="mb-4 border-bottom pb-2">Benimle İletişime Geçin</h2>
 
                     <form id="iletisimform" action="php/iletisim.php" method="POST">
 
                         <div class="mb-3">
                             <label for="adSoyad" class="form-label">Adınız Soyadınız:</label>
-                            <input type="text" class="form-control" id="adSoyad" name="adSoyad"
-                                placeholder="Adınızı ve soyadınızı girin" required>
+                            <input type="text" v-model="adsoyad" class="form-control" id="adSoyad" name="adSoyad"
+                                placeholder="Ad Soyad">
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">E-posta Adresiniz:</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                placeholder="ornek@sakarya.edu.tr" required>
+                            <input type="email" v-model="email" class="form-control" id="email" name="email"
+                                placeholder="ornek@mail.com">
                         </div>
 
                         <div class="mb-3">
                             <label for="telefon" class="form-label">Telefon Numaranız:</label>
-                            <input type="tel" class="form-control" id="telefon" name="telefon"
-                                placeholder="05XX XXX XX XX" required>
+                            <input type="tel" v-model="telefon" class="form-control" id="telefon" name="telefon"
+                                placeholder="05XXXXXXXXX">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="konu" class="form-label">Konu:</label>
+                            <select v-model="konu" class="form-select" id="konu" name="konu">
+                                <option value="">Seçiniz...</option>
+                                <option value="Öneri">Öneri</option>
+                                <option value="Şikayet">Şikayet</option>
+                                <option value="İletişim">Genel İletişim</option>
+                            </select>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Cinsiyetiniz:</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="cinsiyet" id="kadin" value="Kadın">
+                                <input class="form-check-input" type="radio" v-model="cinsiyet" name="cinsiyet"
+                                    id="kadin" value="Kadın">
                                 <label class="form-check-label" for="kadin">Kadın</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="cinsiyet" id="erkek" value="Erkek"
-                                    checked>
+                                <input class="form-check-input" type="radio" v-model="cinsiyet" name="cinsiyet"
+                                    id="erkek" value="Erkek">
                                 <label class="form-check-label" for="erkek">Erkek</label>
                             </div>
                         </div>
 
-
-                        <div class="mb-3">
-                            <label for="mesaj" class="form-label">Mesajınız:</label>
-                            <textarea class="form-control" id="mesaj" name="mesaj" rows="4"
-                                placeholder="Mesajınızı buraya yazın..." required></textarea>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" v-model="onay" class="form-check-input" id="onayKutusu">
+                            <label class="form-check-label" for="onayKutusu">Bilgilerimin doğruluğunu
+                                onaylıyorum.</label>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="mesaj" class="form-label">Mesajınız (Max 180 Karakter):</label>
+                            <textarea v-model="mesaj" class="form-control" id="mesaj" name="mesaj" rows="4"></textarea>
+                        </div>
 
-                        <button type="button" onClick="js:KontrolFonksiyonu()" class="btn text-white w-100"
-                            style="background-color: #008080;">Gönder</button>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <button type="button" onClick="nativeKontrol()" class="btn btn-primary w-100">Gönder
+                                    (Native JS)</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" @click="vueKontrol" class="btn btn-success w-100">Gönder
+                                    (Vue.js)</button>
+                            </div>
+                        </div>
                     </form>
-
                 </div>
             </main>
         </div>
     </div>
 
-    <footer class="text-white text-center py-4 mt-auto">
+    <footer class="text-white text-center py-2 mt-auto" style="background-color: #1E2124;">
         <div class="container">
-            <p class="mb-0">&copy; 2026 - Web Teknolojileri</p>
+            <p class="mb-0">&copy; 2026 - Yusuf Sunav</p>
         </div>
     </footer>
 
     <script>
-        function KontrolFonksiyonu() {
+        // 1. NATIVE JAVASCRIPT DENETİMİ
+        function nativeKontrol() {
             var adsoyad = document.getElementById("adSoyad").value;
             var email = document.getElementById("email").value;
             var mesaj = document.getElementById("mesaj").value;
             var telefon = document.getElementById("telefon").value;
             var onay = document.getElementById("onayKutusu").checked;
+            var mailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            if (adsoyad.length < 3) {
-                alert("Lütfen geçerli bir ad giriniz!");
-                return false;
-            }
-            if (email == '') {
-                alert("Lütfen eposta adresini boş bırakmayınız!");
-                return false;
-            }
-            if (mesaj.length > 180) {
-                alert("Lütfen mesajınızı en az 180 karakter olacak şekilde yazınız!");
-                return false;
-            }
-            if (telefon.length > 11 || telefon == '') {
-                alert("Lütfen geçerli bir telefon numarası giriniz!");
-                return false;
-            }
+            if (adsoyad.length < 3) { alert("Native JS: Geçerli bir ad giriniz!"); return; }
+            if (!mailRegex.test(email)) { alert("Native JS: Geçerli bir e-posta giriniz!"); return; }
+            if (telefon.length != 11 || isNaN(telefon)) { alert("Native JS: Telefon 11 haneli rakam olmalıdır!"); return; }
+            if (mesaj.length > 180) { alert("Native JS: Mesaj en az 180 karakter olmalıdır!"); return; }
+            if (!onay) { alert("Native JS: Onay kutusunu işaretleyiniz!"); return; }
 
-            document.forms["iletisimform"].submit();
+            document.getElementById("iletisimform").submit();
         }
-    </script>
 
+        // 2. VUE.JS FRAMEWORK DENETİMİ
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    adsoyad: '', email: '', telefon: '', konu: '',
+                    cinsiyet: 'Erkek', onay: false, mesaj: ''
+                }
+            },
+            methods: {
+                vueKontrol() {
+                    const mailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                    if (this.adsoyad.length < 3) { alert("Vue.js: Ad çok kısa!"); return; }
+                    if (!mailRegex.test(this.email)) { alert("Vue.js: E-posta hatalı!"); return; }
+                    if (this.telefon.length != 11) { alert("Vue.js: Telefon 11 hane olmalı!"); return; }
+                    if (this.mesaj.length > 180) { alert("Vue.js: Mesaj 180 karakterden az!"); return; }
+                    if (!this.onay) { alert("Vue.js: Onay kutusu gerekli!"); return; }
+
+                    document.getElementById("iletisimform").submit();
+                }
+            }
+        }).mount('#app');
+    </script>
 </body>
 
 </html>

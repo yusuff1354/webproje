@@ -1,0 +1,40 @@
+/* Ortak Renkler ve Fontlar */
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #1A2B4C;
+}
+
+nav {
+    background-color: #2E4057;
+}
+
+footer {
+    background-color: #1E2124;
+}
+
+/* Mirasımız Sayfası İçin Özel Görsel Stili */
+.section-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* İlgi Alanlarım Sayfası İçin Kitap Kartı Stili */
+.card-img-top {
+    height: 300px;
+    object-fit: contain;
+    background-color: #eee;
+}
+
+.kitap-kard {
+    transition: transform 0.2s;
+}
+
+.kitap-kard:hover {
+    transform: scale(1.03);
+}
