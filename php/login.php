@@ -50,7 +50,7 @@
                         
                         echo "<h2 class='text-success mb-4'>Giriş Başarılı!</h2>";
                         echo "<div class='alert alert-success'>Hoşgeldiniz: <strong>$ogrencino</strong></div>";
-                        echo "<a href='hakkimda.html' class='btn text-white mt-3' style='background-color: #008080;'>Siteye Giriş Yap</a>";
+                        echo "<a href='../index.html' class='btn text-white mt-3' style='background-color: #008080;'>Siteye Giriş Yap</a>";
                     } else {
           
                         header("Location: login.html");

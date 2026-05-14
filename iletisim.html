@@ -135,13 +135,15 @@
             var email = document.getElementById("email").value;
             var mesaj = document.getElementById("mesaj").value;
             var telefon = document.getElementById("telefon").value;
+            var konu = document.getElementById("konu").value; // Konu eklendi
             var onay = document.getElementById("onayKutusu").checked;
             var mailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             if (adsoyad.length < 3) { alert("Native JS: Geçerli bir ad giriniz!"); return; }
             if (!mailRegex.test(email)) { alert("Native JS: Geçerli bir e-posta giriniz!"); return; }
             if (telefon.length != 11 || isNaN(telefon)) { alert("Native JS: Telefon 11 haneli rakam olmalıdır!"); return; }
-            if (mesaj.length > 180) { alert("Native JS: Mesaj en az 180 karakter olmalıdır!"); return; }
+            if (konu == "") { alert("Native JS: Lütfen bir konu seçiniz!"); return; } // Konu Kontrolü
+            if (mesaj.length < 3) { alert("Native JS: Mesaj boş bırakılamaz!"); return; }
             if (!onay) { alert("Native JS: Onay kutusunu işaretleyiniz!"); return; }
 
             document.getElementById("iletisimform").submit();
@@ -163,7 +165,8 @@
                     if (this.adsoyad.length < 3) { alert("Vue.js: Ad çok kısa!"); return; }
                     if (!mailRegex.test(this.email)) { alert("Vue.js: E-posta hatalı!"); return; }
                     if (this.telefon.length != 11) { alert("Vue.js: Telefon 11 hane olmalı!"); return; }
-                    if (this.mesaj.length > 180) { alert("Vue.js: Mesaj 180 karakterden az!"); return; }
+                    if (this.konu == "") { alert("Vue.js: Lütfen bir konu seçiniz!"); return; } // Konu Kontrolü
+                    if (this.mesaj.length < 3) { alert("Vue.js: Mesaj alanı boş!"); return; }
                     if (!this.onay) { alert("Vue.js: Onay kutusu gerekli!"); return; }
 
                     document.getElementById("iletisimform").submit();

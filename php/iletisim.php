@@ -38,31 +38,31 @@
                     <h3 class="mb-4" style="color: #008080;">İletişim Formundan Gelen Bilgiler</h3>
 
                     <?php
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $adSoyad = htmlspecialchars($_POST['adSoyad']);
+    $email = htmlspecialchars($_POST['email']);
+    $telefon = htmlspecialchars($_POST['telefon']);
+    // Konu verisini buradan alıyoruz
+    $konu = isset($_POST['konu']) ? htmlspecialchars($_POST['konu']) : "Belirtilmedi";
+    $cinsiyet = isset($_POST['cinsiyet']) ? htmlspecialchars($_POST['cinsiyet']) : "Belirtilmedi";
+    $mesaj = htmlspecialchars($_POST['mesaj']);
 
-                        $adSoyad = htmlspecialchars($_POST['adSoyad']);
-                        $email = htmlspecialchars($_POST['email']);
-                        $telefon = htmlspecialchars($_POST['telefon']);
-                        
-                        $cinsiyet = isset($_POST['cinsiyet']) ? htmlspecialchars($_POST['cinsiyet']) : "Belirtilmedi";
-                        
-                        $mesaj = htmlspecialchars($_POST['mesaj']);
+    echo "<ul class='list-group list-group-flush'>";
+    echo "<li class='list-group-item'><strong>Ad Soyad:</strong> $adSoyad</li>";
+    echo "<li class='list-group-item'><strong>E-posta:</strong> $email</li>";
+    echo "<li class='list-group-item'><strong>Telefon:</strong> $telefon</li>";
+    echo "<li class='list-group-item'><strong>Konu:</strong> $konu</li>"; // Ekrana yazdırıyoruz
+    echo "<li class='list-group-item'><strong>Cinsiyet:</strong> $cinsiyet</li>";
+    echo "<li class='list-group-item'><strong>Mesaj:</strong> <br> $mesaj</li>";
+    echo "</ul>";
+    
+} else {
+    echo "<div class='alert alert-warning'>Form henüz gönderilmedi veya doğrudan bu sayfaya eriştiniz.</div>";
+}
+?>
 
-                        echo "<ul class='list-group list-group-flush'>";
-                        echo "<li class='list-group-item'><strong>Ad Soyad:</strong> $adSoyad</li>";
-                        echo "<li class='list-group-item'><strong>E-posta:</strong> $email</li>";
-                        echo "<li class='list-group-item'><strong>Telefon:</strong> $telefon</li>";
-                        echo "<li class='list-group-item'><strong>Cinsiyet:</strong> $cinsiyet</li>";
-                        echo "<li class='list-group-item'><strong>Mesaj:</strong> <br> $mesaj</li>";
-                        echo "</ul>";
-                        
-                    } else {
-                        echo "<div class='alert alert-warning'>Form henüz gönderilmedi veya doğrudan bu sayfaya eriştiniz.</div>";
-                    }
-                    ?>
-
-                    <a href="iletisim.html" class="btn text-white mt-4 w-100" style="background-color: #008080;">Geri Dön</a>
+                   <a href="../iletisim.html" class="btn text-white mt-4 w-100" style="background-color: #008080;">Geri Dön</a>
                 </div>
             </div>
         </div>
