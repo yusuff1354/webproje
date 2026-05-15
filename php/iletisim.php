@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<div class='alert alert-warning'>Form henüz gönderilmedi veya doğrudan bu sayfaya eriştiniz.</div>";
 }
 ?>
-
+     /* yarın burda da geri dön tuşunu düzelt */
                    <a href="../iletisim.html" class="btn text-white mt-4 w-100" style="background-color: #008080;">Geri Dön</a>
                 </div>
             </div>
